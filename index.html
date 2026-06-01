@@ -39,30 +39,6 @@
         }
         .hero h1 { font-size: 44px; margin-bottom: 10px; }
         .hero p { font-size: 18px; color: #bdc3c7; }
-        
-        /* ایڈمن لاک والا اپلوڈ سیکشن */
-        .upload-section {
-            background-color: white;
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            border: 2px dashed #f39c12;
-        }
-        .upload-btn {
-            background-color: #27ae60;
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: bold;
-            width: 80%;
-        }
-        .upload-btn:hover { background-color: #219653; }
 
         /* گیلری سیکشن */
         .gallery-container {
@@ -131,7 +107,6 @@
         <nav>
             <a href="#">الرئيسية / Home</a>
             <a href="#gallery">معرض الأعمال / Gallery</a>
-            <a href="#upload">إدارة الموقع / Admin</a>
         </nav>
     </header>
 
@@ -139,18 +114,6 @@
         <h1>Sultan Signboard & Advertising</h1>
         <p>Premium 3D LED Signages & ACP Cladding Solutions</p>
         <p>لوحات إعلانية ثلاثية الأبعاد واجهات كلادينج احترافية</p>
-    </section>
-
-    <!-- محفوظ اپلوڈ سیکشن -->
-    <section class="upload-section" id="upload">
-        <h2>لوحة التحكم (خاص بالمالك) <br> <span style="font-size: 16px; color: #e67e22;">Owner Dashboard (Protected)</span></h2>
-        <p style="color: #7f8c8d; font-size: 14px;">تصویر شامل کرنے پر آپ سے خفیہ کوڈ (Sultan2026) مانگا جائے گا۔</p>
-        
-        <form id="uploadForm" style="display: flex; flex-direction: column; gap: 15px; align-items: center; margin-top: 20px;">
-            <input type="text" id="projectTitle" placeholder="عنوان العمل / Project Title" style="width: 80%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required>
-            <input type="file" id="projectImage" accept="image/*" style="margin: 10px 0;" required>
-            <button type="button" onclick="secureUpload()" class="upload-btn">نشر المشروع / Publish Work</button>
-        </form>
     </section>
 
     <section class="gallery-container" id="gallery">
@@ -255,40 +218,5 @@
 
         <p style="margin-top: 30px; font-size: 14px; color: #bdc3c7;">&copy; 2026 Sultan Signboard & Advertising. All rights reserved.</p>
     </footer>
-
-    <script>
-        function secureUpload() {
-            var title = document.getElementById('projectTitle').value;
-            var fileInput = document.getElementById('projectImage');
-            
-            if(!title || fileInput.files.length === 0) {
-                alert("برجاء ملء البيانات واختيار صورة أولاً! / براہ کرم پہلے عنوان لکھیں اور تصویر منتخب کریں۔");
-                return;
-            }
-
-            var password = prompt("أدخل رمز المرور السري الخاص بك:\nاپنا خفیہ سیکیورٹی کوڈ درج کریں:");
-            
-            if (password === "Sultan2026") {
-                var file = fileInput.files[0];
-                var reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    var grid = document.getElementById('galleryGrid');
-                    var newCard = document.createElement('div');
-                    newCard.className = 'card';
-                    newCard.innerHTML = `
-                        <img src="${e.target.result}" alt="${title}">
-                        <div class="card-text">${title}</div>
-                    `;
-                    grid.insertBefore(newCard, grid.firstChild);
-                    alert("تمت إضافة العمل بنجاح! / آپ کا کام کامیابی سے گیلری میں شامل ہو گیا ہے۔");
-                    document.getElementById('uploadForm').reset();
-                }
-                reader.readAsDataURL(file);
-            } else {
-                alert("رمز المرور خاطئ! لا يمكنك النشر. / غلط کوڈ! آپ تصویر اپلوڈ نہیں کر سکتے۔");
-            }
-        }
-    </script>
 </body>
 </html>
