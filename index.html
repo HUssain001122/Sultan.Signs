@@ -1,86 +1,51 @@
 <!DOCTYPE html>
-<html lang="ae" dir="rtl">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sultan Signboard & Advertising | سلطان دعاية وإعلان</title>
+    <title>Sultan Signboard & Advertising</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f6f9;
-            color: #333;
-        }
-        header {
-            background-color: #1a252f;
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo { font-size: 24px; font-weight: bold; color: #f39c12; }
-        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
-        .hero { background-color: #2c3e50; color: white; text-align: center; padding: 80px 20px; }
-        .hero h1 { font-size: 44px; margin-bottom: 10px; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background-color: #f4f6f9; color: #333; }
+        header { background-color: #1a252f; color: white; padding: 20px; text-align: center; }
         
-        .upload-section { background-color: white; max-width: 600px; margin: 40px auto; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; border: 2px dashed #f39c12; }
-        .upload-btn { background-color: #27ae60; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 80%; }
+        .upload-section { 
+            background-color: white; max-width: 500px; margin: 40px auto; padding: 30px; 
+            border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); text-align: center; 
+        }
         
-        .gallery-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; cursor: pointer; transition: transform 0.2s; }
-        .card:hover { transform: translateY(-5px); }
-        .card img { width: 100%; height: 250px; object-fit: cover; }
-        .card-text { padding: 15px; font-weight: bold; }
+        input[type="text"], input[type="file"] {
+            width: 90%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; 
+            border-radius: 6px; box-sizing: border-box;
+        }
+        
+        .upload-btn { 
+            background-color: #27ae60; color: white; padding: 12px 25px; border: none; 
+            border-radius: 6px; cursor: pointer; width: 90%; font-size: 16px; font-weight: bold;
+        }
+        .upload-btn:hover { background-color: #219150; }
 
-        /* Modal Styles */
-        .modal { display: none; position: fixed; z-index: 1000; padding-top: 50px; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); }
-        .modal-content { margin: auto; display: block; max-width: 80%; max-height: 80%; border-radius: 5px; }
-        .close { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; cursor: pointer; }
-
-        footer { background-color: #1a252f; color: white; text-align: center; padding: 40px 20px; margin-top: 50px; }
-        .contact-btn { display: inline-block; background-color: #f39c12; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-size: 18px; font-weight: bold; margin-top: 15px; }
+        .gallery-container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 10px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">سلطان دعاية وإعلان</div>
-        <nav>
-            <a href="#">الرئيسية</a>
-            <a href="#gallery">معرض الأعمال</a>
-        </nav>
+        <h1>سلطان دعاية وإعلان</h1>
     </header>
 
-    <section class="hero">
-        <h1>Sultan Signboard & Advertising</h1>
-        <p>Premium 3D LED Signages & ACP Cladding Solutions</p>
+    <section class="upload-section">
+        <h3>لوحة التحكم (خاص بالمالك)</h3>
+        <input type="text" id="projectTitle" placeholder="عنوان العمل">
+        <input type="file" id="projectImage" accept="image/*">
+        <button class="upload-btn" onclick="secureUpload()">نشر المشروع</button>
     </section>
 
-    <section class="upload-section" id="upload">
-        <h2>لوحة التحكم (خاص بالمالك)</h2>
-        <form id="uploadForm" style="display: flex; flex-direction: column; gap: 15px; align-items: center; margin-top: 20px;">
-            <input type="text" id="projectTitle" placeholder="عنوان العمل" style="width: 80%; padding: 10px;" required>
-            <input type="file" id="projectImage" accept="image/*" required>
-            <button type="button" onclick="secureUpload()" class="upload-btn">نشر المشروع</button>
-        </form>
-    </section>
-
-    <section class="gallery-container" id="gallery">
-        <div class="grid" id="galleryGrid">
-            </div>
-    </section>
-
-    <div id="myModal" class="modal">
-        <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
-        <img class="modal-content" id="fullImage">
+    <div class="gallery-container">
+        <div class="grid" id="galleryGrid"></div>
     </div>
-
-    <footer>
-        <a href="https://wa.me/966590479533" class="contact-btn">📞 التواصل عبر واتساب</a>
-    </footer>
 
     <script>
         function secureUpload() {
@@ -96,20 +61,13 @@
                     var grid = document.getElementById('galleryGrid');
                     var newCard = document.createElement('div');
                     newCard.className = 'card';
-                    newCard.innerHTML = `<img src="${e.target.result}" onclick="openModal(this.src)"> <div class="card-text">${title}</div>`;
-                    grid.insertBefore(newCard, grid.firstChild);
+                    newCard.innerHTML = `<img src="${e.target.result}"> <p>${title}</p>`;
+                    grid.prepend(newCard); // تازہ کام سب سے پہلے دکھانے کے لیے
                 }
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
                 alert("رمز المرور خاطئ!");
             }
-        }
-
-        function openModal(src) {
-            var modal = document.getElementById('myModal');
-            var modalImg = document.getElementById('fullImage');
-            modal.style.display = "block";
-            modalImg.src = src;
         }
     </script>
 </body>
